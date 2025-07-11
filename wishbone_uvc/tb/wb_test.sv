@@ -15,6 +15,9 @@ class base_test extends uvm_test;
         // wb_environment = wb_env::type_id::create("wb_environment", this);
     endfunction
 
+    function void end_of_elaboration_phase(uvm_phase phase);
+        uvm_top.print_topology();
+    endfunction
     
 
 endclass
