@@ -1,0 +1,16 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-INCDIR
+../wishbone_uvc/sv
+-INCDIR
+../spi_uvc/sv
+-INCDIR
+../tb
+-I_INCDIR
+/home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src
+-DEFINE
+USE_PARAMETERIZED_WRAPPER
+-I_INCDIR
+/home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/additions/sv

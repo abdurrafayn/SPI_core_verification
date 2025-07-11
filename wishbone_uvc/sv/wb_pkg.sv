@@ -7,6 +7,7 @@ package wb_pkg;
     `include "wb_monitor.sv"
     `include "wb_sequencer.sv"
     `include "wb_agent.sv"
+    `include "wb_env.sv"
 
 
 endpackage
