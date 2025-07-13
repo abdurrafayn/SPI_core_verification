@@ -2,23 +2,23 @@ module top;
     import uvm_pkg::*;
     `include "uvm_macros.svh"
     import wb_pkg::*;
-    `include "wb_env.sv"
+    `include "spi_env.sv"
     `include "wb_test.sv"
 
-    wb_packet w1;
-    bit ok;
+    logic clk;
+    logic rst;
+
+
+    wishbone_intf w_vif(.clk_i(clk), .rst_i(rst));
+
+    initial clk = 0;
+    always #5 clk = ~clk;
+    
 
     initial begin
-        w1 = new ("w1");
-        
-        repeat(5) begin
-        ok = w1.randomize();
-        assert (ok) else $display("RANDOMIZE FAILED");
-        w1.print();
-        end
-
+        uvm_config_db#(virtual wishbone_intf)::set(null,"*","vif", w_vif);
         run_test("base_test");
     end
 
 
-endmodule
+endmodule: top

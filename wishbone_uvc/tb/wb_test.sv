@@ -5,19 +5,22 @@ class base_test extends uvm_test;
             super.new(name, parent);
         endfunction
 
-        wb_env wb_environment;
+        spi_env spi;
     
 
     function void build_phase(uvm_phase phase);
-        super.build_phase(phase);
-        wb_environment = new("wb_environment", this);
+        
+        uvm_config_wrapper::set(this, "spi.wishbone.agent.sequencer.run_phase", "default_sequence", new_test_seq::get_type());
+        spi = spi_env::type_id::create("spi", this);
+
         `uvm_info("Test phase", "Build phase of test is being executed", UVM_LOW);
+        super.build_phase(phase);
+        
         // wb_environment = wb_env::type_id::create("wb_environment", this);
-    endfunction
+    endfunction: build_phase
 
     function void end_of_elaboration_phase(uvm_phase phase);
         uvm_top.print_topology();
     endfunction
     
-
-endclass
+endclass: base_test

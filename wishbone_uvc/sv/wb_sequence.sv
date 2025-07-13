@@ -1,14 +1,14 @@
-class wb_sequence extends uvm_sequence #(wb_pkg);
+class wb_sequence extends uvm_sequence #(wb_packet);
 
-    `uvm_component_utils(wb_sequence)
+    `uvm_object_utils(wb_sequence)
 
 
-    function new(string name = "wb_sequence", uvm_component parent);
-        super.new(name, parent);
+    function new(string name = "wb_sequence");
+        super.new(name);
     endfunction
 
     function void build_phase(uvm_phase phase);
-        super.build_phase(phase);
+        //super.new();
         `uvm_info("Build_phase", "Build phase of testbench/env is being executed.", UVM_LOW);
     endfunction
 
@@ -37,5 +37,23 @@ class wb_sequence extends uvm_sequence #(wb_pkg);
         `uvm_info(get_type_name(), "OBJECTION DROPPED", UVM_MEDIUM)
         end
     endtask : post_body
+
+endclass
+
+class new_test_seq extends wb_sequence;
+
+`uvm_object_utils(new_test_seq)
+
+  // Constructor
+  function new(string name="new_test_seq");
+    super.new(name);
+  endfunction
+
+  // Sequence body definition
+  task body();
+    `uvm_info(get_type_name(), "Executing new_test_seq sequence", UVM_LOW)
+     repeat(5)
+      `uvm_do(req)
+  endtask
 
 endclass

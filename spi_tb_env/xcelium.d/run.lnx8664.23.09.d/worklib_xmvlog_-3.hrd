@@ -7,7 +7,7 @@
 -INCDIR
 ../spi_uvc/sv
 -INCDIR
-../tb
+../wishbone_uvc/tb
 -I_INCDIR
 /home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src
 -DEFINE

@@ -13,6 +13,7 @@ UVM_PLI
 -INCDIR
 ../tb
 ../sv/wb_pkg.sv
+../sv/wishbone_intf.sv
 top.sv
 -CDSLIB
 ./xcelium.d/run.lnx8664.23.09.d/cdsrun.lib

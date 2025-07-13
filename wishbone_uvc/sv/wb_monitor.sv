@@ -1,8 +1,9 @@
 class wb_monitor extends uvm_monitor;
-
     virtual wishbone_intf wb_vif;
 
     `uvm_component_utils(wb_monitor)
+
+
 
     function new(string name = "wb_monitor", uvm_component parent);
         super.new(name, parent);
@@ -21,19 +22,25 @@ class wb_monitor extends uvm_monitor;
     endfunction: build_phase
 
 
-task run_phase(uvm_phase phase);
+    task run_phase(uvm_phase phase);
         wb_packet pkt;
         forever begin
-            req = new("req");
-            seq_item_port.get_next_item(req);
+
+            pkt = wb_packet::type_id::create("pkt", this);
+            //req = new("req");
+            //seq_item_port.get_next_item(req);
             `uvm_info("master_Monitor", "driving monitor", UVM_LOW)
             //send_to_dut();
+            @(posedge wb_vif.clk_i)
                 wb_vif.cyc_i = 1;
-                wb_vif.stb_i = 1;
-                wb_vif.adr_i = pkt.add_i;
-                wb_vif.we_i = pkt.we_i;
-                wb_vif.dat_i = pkt.dat_i;
-            seq_item_port.item_done();
+                pkt.add_i = wb_vif.adr_i;
+                pkt.we_i  = wb_vif.we_i;
+                pkt.dat_i = wb_vif.dat_i;
+                pkt.dat_o = wb_vif.dat_o;
+            //seq_item_port.item_done();
+
+            `uvm_info("MONITOR", $sformatf("Captured: addr=%0h, we=%0b, dat_i=%0h, dat_o=%0h",
+                                       pkt.add_i, pkt.we_i, pkt.dat_i, pkt.dat_o), UVM_LOW)
         end
     endtask //
 endclass

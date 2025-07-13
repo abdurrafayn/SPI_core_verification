@@ -26,6 +26,8 @@
 /home/cc/mnt/XCELIUM2309/tools.lnx86/methodology/UVM/CDNS-1.1d/sv/src/macros/uvm_deprecated_defines.svh
 ../sv/wb_packet.sv
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_packet.sv
+../sv/wb_sequence.sv
+/home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_sequence.sv
 ../sv/wb_driver.sv
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_driver.sv
 ../sv/wb_monitor.sv
@@ -34,7 +36,9 @@
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_sequencer.sv
 ../sv/wb_agent.sv
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_agent.sv
-wb_env.sv
-/home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/tb/wb_env.sv
+../sv/wb_env.sv
+/home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_env.sv
+spi_env.sv
+/home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/tb/spi_env.sv
 wb_test.sv
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/tb/wb_test.sv

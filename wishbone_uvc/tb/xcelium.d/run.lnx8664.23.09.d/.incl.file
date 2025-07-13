@@ -38,7 +38,9 @@
 ../sv/macros/uvm_deprecated_defines.svh
 ../tb/macros/uvm_deprecated_defines.svh
 ./wb_packet.sv
+./wb_sequence.sv
 ./wb_driver.sv
 ./wb_monitor.sv
 ./wb_sequencer.sv
 ./wb_agent.sv
+./wb_env.sv

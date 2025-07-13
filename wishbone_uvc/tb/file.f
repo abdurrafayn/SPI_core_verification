@@ -2,6 +2,8 @@
 -incdir ../tb
 
 ../sv/wb_pkg.sv
+../sv/wishbone_intf.sv
+
 top.sv
 
 #+UVM_TESTNAME=wb_pkg

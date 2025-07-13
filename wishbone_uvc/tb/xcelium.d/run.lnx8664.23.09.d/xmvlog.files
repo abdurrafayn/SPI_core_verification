@@ -3,4 +3,5 @@
 // Do not modify this file
 //
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wb_pkg.sv
+/home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/sv/wishbone_intf.sv
 /home/cc/Downloads/Rafay_Data/SPI_core_verification/wishbone_uvc/tb/top.sv

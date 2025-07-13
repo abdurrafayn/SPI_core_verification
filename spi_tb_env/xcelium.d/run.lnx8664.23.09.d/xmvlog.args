@@ -13,10 +13,11 @@ UVM_PLI
 -INCDIR
 ../spi_uvc/sv
 -INCDIR
-../tb
+../wishbone_uvc/tb
 ../wishbone_uvc/sv/wb_pkg.sv
 ../spi_uvc/sv/spi_pkg.sv
-top.sv
+./interface.sv
+./top.sv
 -CDSLIB
 ./xcelium.d/run.lnx8664.23.09.d/cdsrun.lib
 -HDLVAR

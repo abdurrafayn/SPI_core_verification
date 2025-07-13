@@ -1,5 +1,5 @@
 #!/bin/csh
 
 source ~/USER/cshrc
-`
-xrun -access +rwc -uvm -+f file.f`
+
+xrun -access +rwc -uvm -f file.f

@@ -1,5 +1,5 @@
 xrun(64): 23.09-s006: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
-TOOL:	xrun(64)	23.09-s006: Started on Jul 11, 2025 at 15:17:30 PKT
+TOOL:	xrun(64)	23.09-s006: Started on Jul 13, 2025 at 19:54:57 PKT
 xrun
 	-access +rwc
 	-uvm
@@ -7,6 +7,7 @@ xrun
 		-incdir ../sv
 		-incdir ../tb
 		../sv/wb_pkg.sv
+		../sv/wishbone_intf.sv
 		top.sv
 		+UVM_VERBOSITY=UVM_HIGH
 
@@ -353,75 +354,137 @@ CDNS-UVM-1.1d (23.09-s006)
 
       (Specify +UVM_NO_RELNOTES to turn off this notice)
 
--------------------------------
-Name     Type       Size  Value
--------------------------------
-w1       wb_packet  -     @2598
-  dat_i  integral   8     'h44 
-  add_i  integral   2     'h0  
-  we_i   integral   1     'h1  
-  dat_o  integral   8     'h0  
--------------------------------
--------------------------------
-Name     Type       Size  Value
--------------------------------
-w1       wb_packet  -     @2598
-  dat_i  integral   8     'h11 
-  add_i  integral   2     'h3  
-  we_i   integral   1     'h0  
-  dat_o  integral   8     'h0  
--------------------------------
--------------------------------
-Name     Type       Size  Value
--------------------------------
-w1       wb_packet  -     @2598
-  dat_i  integral   8     'hc  
-  add_i  integral   2     'h3  
-  we_i   integral   1     'h1  
-  dat_o  integral   8     'h0  
--------------------------------
--------------------------------
-Name     Type       Size  Value
--------------------------------
-w1       wb_packet  -     @2598
-  dat_i  integral   8     'h7f 
-  add_i  integral   2     'h2  
-  we_i   integral   1     'h1  
-  dat_o  integral   8     'h0  
--------------------------------
--------------------------------
-Name     Type       Size  Value
--------------------------------
-w1       wb_packet  -     @2598
-  dat_i  integral   8     'hce 
-  add_i  integral   2     'h1  
-  we_i   integral   1     'h1  
-  dat_o  integral   8     'h0  
--------------------------------
 UVM_INFO @ 0: reporter [RNTST] Running test base_test...
-UVM_INFO wb_test.sv(14) @ 0: uvm_test_top [Test phase] Build phase of test is being executed
-UVM_INFO wb_env.sv(12) @ 0: uvm_test_top.wb_environment [Build_phase] Build phase of testbench/env is being executed.
+UVM_INFO wb_test.sv(16) @ 0: uvm_test_top [Test phase] Build phase of test is being executed
+UVM_INFO spi_env.sv(12) @ 0: uvm_test_top.spi [Build_phase] Build phase of testbench/env is being executed.
+UVM_INFO ../sv/wb_env.sv(12) @ 0: uvm_test_top.spi.wishbone [Build_phase] Build phase of testbench/env is being executed.
 UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
---------------------------------------------------------------
-Name                       Type                    Size  Value
---------------------------------------------------------------
-uvm_test_top               base_test               -     @2637
-  wb_environment           wb_env                  -     @2674
-    agent                  wb_agent                -     @2724
-      driver               wb_driver               -     @3427
-        rsp_port           uvm_analysis_port       -     @3526
-        seq_item_port      uvm_seq_item_pull_port  -     @3477
-      monitor              wb_monitor              -     @2758
-      sequencer            wb_sequencer            -     @2788
-        rsp_export         uvm_analysis_export     -     @2846
-        seq_item_export    uvm_seq_item_pull_imp   -     @3396
-        arbitration_queue  array                   0     -    
-        lock_queue         array                   0     -    
-        num_last_reqs      integral                32    'd1  
-        num_last_rsps      integral                32    'd1  
---------------------------------------------------------------
+----------------------------------------------------------------
+Name                         Type                    Size  Value
+----------------------------------------------------------------
+uvm_test_top                 base_test               -     @2635
+  spi                        spi_env                 -     @2706
+    wishbone                 wb_env                  -     @2742
+      agent                  wb_agent                -     @2777
+        driver               wb_driver               -     @3480
+          rsp_port           uvm_analysis_port       -     @3579
+          seq_item_port      uvm_seq_item_pull_port  -     @3530
+        monitor              wb_monitor              -     @2811
+        sequencer            wb_sequencer            -     @2841
+          rsp_export         uvm_analysis_export     -     @2899
+          seq_item_export    uvm_seq_item_pull_imp   -     @3449
+          arbitration_queue  array                   0     -    
+          lock_queue         array                   0     -    
+          num_last_reqs      integral                32    'd1  
+          num_last_rsps      integral                32    'd1  
+----------------------------------------------------------------
 
-UVM_INFO ../sv/wb_agent.sv(14) @ 0: uvm_test_top.wb_environment.agent [wb_agent] Running Agent simulation ....
+UVM_INFO ../sv/wb_agent.sv(14) @ 0: uvm_test_top.spi.wishbone.agent [wb_agent] Running Agent simulation ....
+UVM_INFO ../sv/wb_monitor.sv(32) @ 0: uvm_test_top.spi.wishbone.agent.monitor [master_Monitor] driving monitor
+UVM_INFO ../sv/wb_sequence.sv(24) @ 0: uvm_test_top.spi.wishbone.agent.sequencer@@new_test_seq [new_test_seq] OBJECTION RAISED
+UVM_INFO ../sv/wb_sequence.sv(54) @ 0: uvm_test_top.spi.wishbone.agent.sequencer@@new_test_seq [new_test_seq] Executing new_test_seq sequence
+UVM_INFO ../sv/wb_driver.sv(28) @ 0: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driving transaction: addr=1, data=7e, we=0
+UVM_INFO ../sv/wb_driver.sv(30) @ 0: uvm_test_top.spi.wishbone.agent.driver [master_driver] driving master
+UVM_INFO ../sv/wb_driver.sv(39) @ 5: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driver Packet: 
+------------------------------------------------------------------------------------------------------
+Name                           Type       Size  Value                                                 
+------------------------------------------------------------------------------------------------------
+req                            wb_packet  -     @3701                                                 
+  dat_i                        integral   8     'h7e                                                  
+  add_i                        integral   2     'h1                                                   
+  we_i                         integral   1     'h0                                                   
+  dat_o                        integral   8     'h0                                                   
+  begin_time                   time       64    0                                                     
+  depth                        int        32    'd2                                                   
+  parent sequence (name)       string     12    new_test_seq                                          
+  parent sequence (full name)  string     54    uvm_test_top.spi.wishbone.agent.sequencer.new_test_seq
+  sequencer                    string     41    uvm_test_top.spi.wishbone.agent.sequencer             
+------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../sv/wb_monitor.sv(43) @ 5: uvm_test_top.spi.wishbone.agent.monitor [MONITOR] Captured: addr=1, we=0, dat_i=7e, dat_o=0
+UVM_INFO ../sv/wb_monitor.sv(32) @ 5: uvm_test_top.spi.wishbone.agent.monitor [master_Monitor] driving monitor
+UVM_INFO ../sv/wb_driver.sv(28) @ 5: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driving transaction: addr=1, data=60, we=1
+UVM_INFO ../sv/wb_driver.sv(30) @ 5: uvm_test_top.spi.wishbone.agent.driver [master_driver] driving master
+UVM_INFO ../sv/wb_monitor.sv(43) @ 15: uvm_test_top.spi.wishbone.agent.monitor [MONITOR] Captured: addr=1, we=0, dat_i=7e, dat_o=0
+UVM_INFO ../sv/wb_monitor.sv(32) @ 15: uvm_test_top.spi.wishbone.agent.monitor [master_Monitor] driving monitor
+UVM_INFO ../sv/wb_driver.sv(39) @ 15: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driver Packet: 
+------------------------------------------------------------------------------------------------------
+Name                           Type       Size  Value                                                 
+------------------------------------------------------------------------------------------------------
+req                            wb_packet  -     @3676                                                 
+  dat_i                        integral   8     'h60                                                  
+  add_i                        integral   2     'h1                                                   
+  we_i                         integral   1     'h1                                                   
+  dat_o                        integral   8     'h0                                                   
+  begin_time                   time       64    5                                                     
+  depth                        int        32    'd2                                                   
+  parent sequence (name)       string     12    new_test_seq                                          
+  parent sequence (full name)  string     54    uvm_test_top.spi.wishbone.agent.sequencer.new_test_seq
+  sequencer                    string     41    uvm_test_top.spi.wishbone.agent.sequencer             
+------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../sv/wb_driver.sv(28) @ 15: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driving transaction: addr=1, data=f8, we=0
+UVM_INFO ../sv/wb_driver.sv(30) @ 15: uvm_test_top.spi.wishbone.agent.driver [master_driver] driving master
+UVM_INFO ../sv/wb_monitor.sv(43) @ 25: uvm_test_top.spi.wishbone.agent.monitor [MONITOR] Captured: addr=1, we=1, dat_i=60, dat_o=0
+UVM_INFO ../sv/wb_monitor.sv(32) @ 25: uvm_test_top.spi.wishbone.agent.monitor [master_Monitor] driving monitor
+UVM_INFO ../sv/wb_driver.sv(39) @ 25: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driver Packet: 
+------------------------------------------------------------------------------------------------------
+Name                           Type       Size  Value                                                 
+------------------------------------------------------------------------------------------------------
+req                            wb_packet  -     @3776                                                 
+  dat_i                        integral   8     'hf8                                                  
+  add_i                        integral   2     'h1                                                   
+  we_i                         integral   1     'h0                                                   
+  dat_o                        integral   8     'h0                                                   
+  begin_time                   time       64    15                                                    
+  depth                        int        32    'd2                                                   
+  parent sequence (name)       string     12    new_test_seq                                          
+  parent sequence (full name)  string     54    uvm_test_top.spi.wishbone.agent.sequencer.new_test_seq
+  sequencer                    string     41    uvm_test_top.spi.wishbone.agent.sequencer             
+------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../sv/wb_driver.sv(28) @ 25: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driving transaction: addr=3, data=45, we=0
+UVM_INFO ../sv/wb_driver.sv(30) @ 25: uvm_test_top.spi.wishbone.agent.driver [master_driver] driving master
+UVM_INFO ../sv/wb_monitor.sv(43) @ 35: uvm_test_top.spi.wishbone.agent.monitor [MONITOR] Captured: addr=1, we=0, dat_i=f8, dat_o=0
+UVM_INFO ../sv/wb_monitor.sv(32) @ 35: uvm_test_top.spi.wishbone.agent.monitor [master_Monitor] driving monitor
+UVM_INFO ../sv/wb_driver.sv(39) @ 35: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driver Packet: 
+------------------------------------------------------------------------------------------------------
+Name                           Type       Size  Value                                                 
+------------------------------------------------------------------------------------------------------
+req                            wb_packet  -     @3743                                                 
+  dat_i                        integral   8     'h45                                                  
+  add_i                        integral   2     'h3                                                   
+  we_i                         integral   1     'h0                                                   
+  dat_o                        integral   8     'h0                                                   
+  begin_time                   time       64    25                                                    
+  depth                        int        32    'd2                                                   
+  parent sequence (name)       string     12    new_test_seq                                          
+  parent sequence (full name)  string     54    uvm_test_top.spi.wishbone.agent.sequencer.new_test_seq
+  sequencer                    string     41    uvm_test_top.spi.wishbone.agent.sequencer             
+------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../sv/wb_driver.sv(28) @ 35: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driving transaction: addr=0, data=47, we=0
+UVM_INFO ../sv/wb_driver.sv(30) @ 35: uvm_test_top.spi.wishbone.agent.driver [master_driver] driving master
+UVM_INFO ../sv/wb_monitor.sv(43) @ 45: uvm_test_top.spi.wishbone.agent.monitor [MONITOR] Captured: addr=3, we=0, dat_i=45, dat_o=0
+UVM_INFO ../sv/wb_monitor.sv(32) @ 45: uvm_test_top.spi.wishbone.agent.monitor [master_Monitor] driving monitor
+UVM_INFO ../sv/wb_driver.sv(39) @ 45: uvm_test_top.spi.wishbone.agent.driver [wb_driver] Driver Packet: 
+------------------------------------------------------------------------------------------------------
+Name                           Type       Size  Value                                                 
+------------------------------------------------------------------------------------------------------
+req                            wb_packet  -     @3732                                                 
+  dat_i                        integral   8     'h47                                                  
+  add_i                        integral   2     'h0                                                   
+  we_i                         integral   1     'h0                                                   
+  dat_o                        integral   8     'h0                                                   
+  begin_time                   time       64    35                                                    
+  depth                        int        32    'd2                                                   
+  parent sequence (name)       string     12    new_test_seq                                          
+  parent sequence (full name)  string     54    uvm_test_top.spi.wishbone.agent.sequencer.new_test_seq
+  sequencer                    string     41    uvm_test_top.spi.wishbone.agent.sequencer             
+------------------------------------------------------------------------------------------------------
+
+UVM_INFO ../sv/wb_sequence.sv(37) @ 45: uvm_test_top.spi.wishbone.agent.sequencer@@new_test_seq [new_test_seq] OBJECTION DROPPED
+UVM_INFO /home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_objection.svh(1268) @ 45: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
 
 --- UVM Report catcher Summary ---
 
@@ -436,17 +499,23 @@ Number of caught UVM_WARNING reports :    0
 --- UVM Report Summary ---
 
 ** Report counts by severity
-UVM_INFO :    5
+UVM_INFO :   36
 UVM_WARNING :    0
 UVM_ERROR :    0
 UVM_FATAL :    0
 ** Report counts by id
-[Build_phase]     1
+[Build_phase]     2
+[MONITOR]     5
 [RNTST]     1
+[TEST_DONE]     1
 [Test phase]     1
 [UVMTOP]     1
+[master_Monitor]     6
+[master_driver]     5
+[new_test_seq]     3
 [wb_agent]     1
-Simulation complete via $finish(1) at time 0 FS + 179
+[wb_driver]    10
+Simulation complete via $finish(1) at time 45 NS + 50
 /home/cc/mnt/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
 xcelium> exit
-TOOL:	xrun(64)	23.09-s006: Exiting on Jul 11, 2025 at 15:17:32 PKT  (total: 00:00:02)
+TOOL:	xrun(64)	23.09-s006: Exiting on Jul 13, 2025 at 19:54:58 PKT  (total: 00:00:01)
