@@ -28,25 +28,39 @@ class spi_monitor extends uvm_monitor;
         int bit_count;
 
         forever begin
-            // @(posedge spi_vif.clk_i);
-            //     if (spi_vif.ss_o[0] == 0) begin
-            //         shift_reg = 8'b0;
-            //         bit_count = 0;
-
-                while(bit_count = 8)
-                 //@(posedge spi_intf.ss_o[0]== 0) begin
-                    @(posedge spi_vif.sck_o);
-                    shift_reg = {shift_reg[6:0], spi_vif.mosi_o};
-                    bit_count++;
-
-                if (bit_count == 8) begin
-                    pkt = spi_packet::type_id::create("pkt", this);
-                    pkt.mosi_o = shift_reg;
-            end
-        
-            `uvm_info("master_Monitor", "driving master", UVM_LOW)
+            pkt = slave_packet::type_id::create("Mon_slave_pkt", this);
+            in_dex = 7;
+       
+            while(bit_count = 8) begin
+              
+            @(posedge spi_vif.sck_o) 
+            #1
+               pkt.data_in[in_dex] = spi_vif.miso_i;
+                //pkt.data_out[in_dex] = spi_vif.mosi_o;
+                pkt.miso_i = spi_vif.miso_i;
+                //pkt.mosi_o = spi_vif.mosi_o;
+                in_dex--;
+                bit_count++;
+            end       
+                `uvm_info("master_Monitor", "driving master", UVM_LOW)
         end
-                end
+
+
+        // forever begin
+            
+
+        //         while(bit_count = 8)
+        //             @(posedge spi_vif.sck_o);
+        //             shift_reg = {shift_reg[6:0], spi_vif.mosi_o};
+        //             bit_count++;
+
+        //         if (bit_count == 8) begin
+        //             pkt = spi_packet::type_id::create("pkt", this);
+        //             pkt.mosi_o = shift_reg;
+        //     end
+        
+        //     `uvm_info("master_Monitor", "driving master", UVM_LOW)
+        // end
         //end
     endtask //
 
@@ -56,3 +70,4 @@ class spi_monitor extends uvm_monitor;
     endfunction
 
 endclass
+

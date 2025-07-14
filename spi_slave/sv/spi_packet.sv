@@ -5,7 +5,7 @@ class spi_packet extends uvm_sequence_item;
 rand bit [7:0] data_out;
 bit [7:0] data_in;
 bit [1:0] ss_o;
-bit mosi_i;
+rand bit miso_i;
 bit mosi_o;
 
 `uvm_object_utils_begin(spi_packet)
