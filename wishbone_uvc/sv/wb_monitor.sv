@@ -24,6 +24,7 @@ class wb_monitor extends uvm_monitor;
 
     task run_phase(uvm_phase phase);
         wb_packet pkt;
+        
         forever begin
 
             pkt = wb_packet::type_id::create("pkt", this);
@@ -39,8 +40,9 @@ class wb_monitor extends uvm_monitor;
                 pkt.dat_o = wb_vif.dat_o;
             //seq_item_port.item_done();
 
-            `uvm_info("MONITOR", $sformatf("Captured: addr=%0h, we=%0b, dat_i=%0h, dat_o=%0h",
-                                       pkt.add_i, pkt.we_i, pkt.dat_i, pkt.dat_o), UVM_LOW)
+            `uvm_info(get_type_name(), $sformatf("Monitor Packet: \n%s", pkt.sprint()), UVM_HIGH)
+            // `uvm_info("MONITOR", $sformatf("Captured: addr=%0h, we=%0b, dat_i=%0h, dat_o=%0h",
+            //                            pkt.add_i, pkt.we_i, pkt.dat_i, pkt.dat_o), UVM_LOW)
         end
     endtask //
 endclass

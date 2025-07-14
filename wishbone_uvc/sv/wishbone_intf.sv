@@ -11,10 +11,6 @@ interface wishbone_intf(input logic clk_i, input logic rst_i);
   logic        ack_o;         // normal bus termination
   logic        inta_o;        // interrupt output
 
-  // SPI port
-  logic        sck_o;         // serial clock output
-  logic [1:0] ss_o;      // slave select (active low)
-  logic        mosi_o;        // MasterOut SlaveIN
-  logic        miso_i;         // MasterIn SlaveOut
+
 
 endinterface

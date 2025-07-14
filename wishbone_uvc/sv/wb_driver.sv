@@ -24,10 +24,11 @@ class wb_driver extends uvm_driver #(wb_packet);
         wb_packet pkt;
         forever begin
             seq_item_port.get_next_item(req);
-            `uvm_info(get_type_name(), $sformatf("Driving transaction: addr=%0h, data=%0h, we=%0b",
-                                           req.add_i, req.dat_i, req.we_i), UVM_LOW)
+            // `uvm_info(get_type_name(), $sformatf("Driving transaction: addr=%0h, data=%0h, we=%0b",
+            //                                req.add_i, req.dat_i, req.we_i), UVM_LOW)
             //req = new("req");
-            `uvm_info("master_driver", "driving master", UVM_LOW)
+            `uvm_info("master_driver", "driving master /n", UVM_LOW)
+            `uvm_info("master_driver", "***************************", UVM_LOW)
             //send_to_dut();
             @(posedge wb_vif.clk_i)
                 wb_vif.cyc_i = 1;
