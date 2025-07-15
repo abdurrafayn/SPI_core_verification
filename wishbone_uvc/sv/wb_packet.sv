@@ -5,7 +5,6 @@ class wb_packet extends uvm_sequence_item;
 rand bit [7:0]  dat_i;
 rand bit [1:0]  add_i;
 rand bit        we_i;
-
 bit [7:0]       dat_o;
 
 `uvm_object_utils_begin(wb_packet)

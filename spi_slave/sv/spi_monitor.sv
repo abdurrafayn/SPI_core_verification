@@ -44,24 +44,6 @@ class spi_monitor extends uvm_monitor;
             end       
                 `uvm_info("master_Monitor", "driving master", UVM_LOW)
         end
-
-
-        // forever begin
-            
-
-        //         while(bit_count = 8)
-        //             @(posedge spi_vif.sck_o);
-        //             shift_reg = {shift_reg[6:0], spi_vif.mosi_o};
-        //             bit_count++;
-
-        //         if (bit_count == 8) begin
-        //             pkt = spi_packet::type_id::create("pkt", this);
-        //             pkt.mosi_o = shift_reg;
-        //     end
-        
-        //     `uvm_info("master_Monitor", "driving master", UVM_LOW)
-        // end
-        //end
     endtask //
 
     function void connect_phase(uvm_phase phase);
