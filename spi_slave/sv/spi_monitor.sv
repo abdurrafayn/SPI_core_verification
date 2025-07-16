@@ -2,6 +2,8 @@ class spi_monitor extends uvm_monitor;
 
     `uvm_component_utils(spi_monitor)
 
+    uvm_analysis_port#(spi_packet) spi_pkt_port;
+
     virtual wishbone_intf spi_vif; 
     
 
@@ -34,16 +36,17 @@ class spi_monitor extends uvm_monitor;
             while(bit_count = 8) begin
               
             @(posedge spi_vif.sck_o) 
-            #1
-               pkt.data_in[in_dex] = spi_vif.miso_i;
+            #1ns
+               pkt.data_in[in_dex] = spi_vif.mosi_o;
                 //pkt.data_out[in_dex] = spi_vif.mosi_o;
-                pkt.miso_i = spi_vif.miso_i;
+                // pkt.miso_i = spi_vif.miso_i;
                 //pkt.mosi_o = spi_vif.mosi_o;
                 in_dex--;
                 bit_count++;
             end       
                 `uvm_info("master_Monitor", "driving master", UVM_LOW)
         end
+        spi_pkt_port.write(pkt);
     endtask //
 
     function void connect_phase(uvm_phase phase);

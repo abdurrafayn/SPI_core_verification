@@ -41,10 +41,12 @@ class wb_monitor extends uvm_monitor;
                 pkt.operation = READ;
 
                 `uvm_info(get_type_name(), $sformatf("Monitor Captured Packet:\n%s", pkt.sprint()), UVM_HIGH)
-                wishbone_pkt_port.write(pkt);
             end
         end
 
+     wishbone_pkt_port.write(pkt);
+    endtask
+endclass
 
         // forever begin
 
@@ -65,5 +67,3 @@ class wb_monitor extends uvm_monitor;
         //     // `uvm_info("MONITOR", $sformatf("Captured: addr=%0h, we=%0b, dat_i=%0h, dat_o=%0h",
         //     //                            pkt.add_i, pkt.we_i, pkt.dat_i, pkt.dat_o), UVM_LOW)
         // end
-    endtask //
-endclass

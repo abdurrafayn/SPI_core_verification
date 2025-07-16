@@ -67,11 +67,11 @@ class wb_driver extends uvm_driver #(wb_packet);
             wb_vif.we_i  <= 1;
             wb_vif.dat_i <= pkt.dat_i;
 
-        //wait (wb_vif.ack_o == 1);
-        @(posedge wb_vif.clk_i);
-            wb_vif.cyc_i <= 0;
-            wb_vif.stb_i <= 0;
-            wb_vif.we_i  <= 0;
+        @(posedge wb_vif.ack_o);
+            @(posedge wb_vif.clk_i);
+                wb_vif.cyc_i <= 0;
+                wb_vif.stb_i <= 0;
+                wb_vif.we_i  <= 0;
     endtask
 
   // ---------------------------------------------------------
@@ -83,20 +83,24 @@ class wb_driver extends uvm_driver #(wb_packet);
         wb_vif.adr_i <= pkt.add_i;
         wb_vif.we_i  <= 0;
 
-    //wait (wb_vif.ack_o == 1);
-    @(posedge wb_vif.clk_i);
-        pkt.dat_o = wb_vif.dat_o;
+    @(posedge wb_vif.ack_o);
+        @(posedge wb_vif.clk_i);
+            pkt.dat_o = wb_vif.dat_o;
 
-        wb_vif.cyc_i <= 0;
-        wb_vif.stb_i <= 0;
+            wb_vif.cyc_i <= 0;
+            wb_vif.stb_i <= 0;
   endtask
 
-  // ---------------------------------------------------------
+  // ***********************************************************************************8
   // IDLE TASk
   task do_idle();
     `uvm_info(get_type_name(), "IDLE Operation. No wishbone activity.", UVM_MEDIUM)
     @(posedge wb_vif.clk_i);
-    // optionally insert delay here
+        wb_vif.cyc_i <= 0;
+        wb_vif.stb_i <= 0;
+        wb_vif.adr_i <= pkt.add_i;
+        wb_vif.we_i  <= 1;
+        wb_vif.dat_i <= pkt.dat_i;
   endtask
 
 endclass
