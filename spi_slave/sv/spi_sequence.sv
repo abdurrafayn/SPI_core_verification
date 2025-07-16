@@ -34,27 +34,40 @@ class spi_sequence extends uvm_sequence #(spi_packet);
         `endif
         if (phase != null) begin
         phase.drop_objection(this, get_type_name());
-        `uvm_info(get_type_name(), "OBJECTION DROPPED", UVM_MEDIUM)
+ 
+    `uvm_object_utils(new_test_seq)
+
+    // Constructor
+    function new(string name="new_test_seq");
+        super.new(name);
+    endfunction
+
+    // Sequence body definition
+    task body();
+        `uvm_info(get_type_name(), "Executing new_test_seq sequence", UVM_LOW)
+        repeat(5)
+        `uvm_do(req)
+    endtask
+       `uvm_info(get_type_name(), "OBJECTION DROPPED", UVM_MEDIUM)
         end
     endtask : post_body
 
 endclass
 
-// class new_test_seq extends wb_sequence;
+class new_test_seq extends wb_sequence;
 
-// `uvm_object_utils(new_test_seq)
+    `uvm_object_utils(new_test_seq)
 
-//   // Constructor
-//   function new(string name="new_test_seq");
-//     super.new(name);
-//   endfunction
+    // Constructor
+    function new(string name="new_test_seq");
+        super.new(name);
+    endfunction
 
-//   // Sequence body definition
-//   task body();
-//     `uvm_info(get_type_name(), "Executing new_test_seq sequence", UVM_LOW)
-//      repeat(5)
-//       `uvm_do(req)
-//   endtask
-
-// endclass
+    // Sequence body definition
+    task body();
+        `uvm_info(get_type_name(), "Executing new_test_seq sequence in SPI SLave", UVM_LOW)
+        repeat(5)
+        `uvm_do(req)
+    endtask
+endclass
 

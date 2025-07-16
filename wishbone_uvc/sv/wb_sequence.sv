@@ -78,6 +78,13 @@ class basic_write_seq extends wb_sequence;
   task body();
     `uvm_info(get_type_name(), "Starting basic_write_seq", UVM_LOW)
 
+    // Enabling SPI
+    `uvm_create(req)
+    req.operation = WRITE;
+    req.adr_i = 3'b000; // SPCR
+    req.dat_i = 8'b01010000; // SPE = 1, MSTR = 1, CPOL/CPHA = 0
+    `uvm_send(req)
+
     `uvm_create(req)
     req.operation = WRITE;
     req.adr_i = 3'b010; // SPDR
@@ -106,11 +113,19 @@ class multi_byte_write_seq extends wb_sequence;
     bit [7:0] data_array[4] = {8'h11, 8'h22, 8'h33, 8'h44};
 
     foreach (data_array[i]) begin
-      `uvm_create(req)
-      req.operation = WRITE;
-      req.adr_i = 3'b010; // SPDR
-      req.dat_i = data_array[i];
-      `uvm_send(req)
+
+        // Enabling SPI
+        `uvm_create(req)
+        req.operation = WRITE;
+        req.adr_i = 3'b000; // SPCR
+        req.dat_i = 8'b01010000; // SPE = 1, MSTR = 1, CPOL/CPHA = 0
+        `uvm_send(req)
+
+        `uvm_create(req)
+        req.operation = WRITE;
+        req.adr_i = 3'b010; // SPDR
+        req.dat_i = data_array[i];
+        `uvm_send(req)
     end
   endtask
 endclass

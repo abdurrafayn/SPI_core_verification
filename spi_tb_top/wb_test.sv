@@ -11,7 +11,8 @@ class base_test extends uvm_test;
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
-        spi_wb = new("spi_wb", this);
+        // spi_wb = new("spi_wb", this);
+        spi_wb = spi_wb_env::type_id::create("spi_wb", this);
         `uvm_info("Test phase", "Build phase of test is being executed", UVM_LOW);
         // wb_environment = wb_env::type_id::create("wb_environment", this);
     endfunction
@@ -20,5 +21,4 @@ class base_test extends uvm_test;
         uvm_top.print_topology();
     endfunction
     
-
 endclass
