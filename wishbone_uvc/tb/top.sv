@@ -14,6 +14,11 @@ module top;
     initial clk = 0;
     always #5 clk = ~clk;
     
+    initial begin
+    rst = 1;
+    #10;
+    rst = 0;
+    end
 
     initial begin
         uvm_config_db#(virtual wishbone_intf)::set(null,"*","vif", w_vif);

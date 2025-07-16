@@ -7,6 +7,8 @@ rand bit [1:0]  add_i;
 rand bit        we_i;
 bit [7:0]       dat_o;
 
+rand wb_packet_e operation;
+
 `uvm_object_utils_begin(wb_packet)
     `uvm_field_int(dat_i, UVM_ALL_ON)
     `uvm_field_int(add_i, UVM_ALL_ON)

@@ -40,6 +40,11 @@ class wb_sequence extends uvm_sequence #(wb_packet);
 
 endclass
 
+
+// **************************************************************************************************
+//                                         Test 1                                                 
+// **************************************************************************************************
+
 class new_test_seq extends wb_sequence;
 
 `uvm_object_utils(new_test_seq)
@@ -56,4 +61,95 @@ class new_test_seq extends wb_sequence;
       `uvm_do(req)
   endtask
 
+endclass
+
+
+// **************************************************************************************************
+//                                         Test 2                                                 
+// **************************************************************************************************
+
+class basic_write_seq extends wb_sequence;
+  `uvm_object_utils(basic_write_seq)
+
+  function new(string name = "basic_write_seq");
+    super.new(name);
+  endfunction
+
+  task body();
+    `uvm_info(get_type_name(), "Starting basic_write_seq", UVM_LOW)
+
+    `uvm_create(req)
+    req.operation = WRITE;
+    req.adr_i = 3'b010; // SPDR
+    req.dat_i = 8'hA5;
+    `uvm_send(req)
+
+  endtask
+endclass
+
+
+// **************************************************************************************************
+//                                         Test 3                                                 
+// **************************************************************************************************
+
+
+class multi_byte_write_seq extends wb_sequence;
+  `uvm_object_utils(multi_byte_write_seq)
+
+  function new(string name = "multi_byte_write_seq");
+    super.new(name);
+  endfunction
+
+  task body();
+    `uvm_info(get_type_name(), "Starting multi_byte_write_seq", UVM_LOW)
+
+    bit [7:0] data_array[4] = {8'h11, 8'h22, 8'h33, 8'h44};
+
+    foreach (data_array[i]) begin
+      `uvm_create(req)
+      req.operation = WRITE;
+      req.adr_i = 3'b010; // SPDR
+      req.dat_i = data_array[i];
+      `uvm_send(req)
+    end
+  endtask
+endclass
+
+// **************************************************************************************************
+//                                         Test 4                                                 
+// **************************************************************************************************
+
+
+class config_and_transfer_seq extends wb_sequence;
+  `uvm_object_utils(config_and_transfer_seq)
+
+  function new(string name = "config_and_transfer_seq");
+    super.new(name);
+  endfunction
+
+  task body();
+    `uvm_info(get_type_name(), "Starting config_and_transfer_seq", UVM_LOW)
+
+    // Enabling SPI
+    `uvm_create(req)
+    req.operation = WRITE;
+    req.adr_i = 3'b000; // SPCR
+    req.dat_i = 8'b01010000; // SPE = 1, MSTR = 1, CPOL/CPHA = 0
+    `uvm_send(req)
+
+    // writing through SPDR
+    `uvm_create(req)
+    req.operation = WRITE;
+    req.adr_i = 3'b010; // SPDR
+    req.dat_i = 8'h5A;
+    `uvm_send(req)
+
+    #800; //some delay so that data completey transfer
+
+    `uvm_create(req)
+    req.operation = WRITE;
+    req.adr_i = 3'b000; // SPCR
+    req.dat_i = 8'b00000000;
+    `uvm_send(req)
+  endtask
 endclass
